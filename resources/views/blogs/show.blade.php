@@ -42,14 +42,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                   
                     <tr>
                        <td>{{$result->id}}</td>
                        <td>{{$result->name}}</td>
                        <td>{{$result->image}}</td>
                        <td>{{$result->description}}</td>
                     </tr>
-                   
                     
                 </tbody>
             </table>

@@ -22,6 +22,21 @@ Route::get('/', function () {
 
 //Route::get('/',[BlogController::class,'index']);
 
-Route::resource('/blogs',BlogsController::class);
+Route::resource('blogs',BlogsController::class);
 
-Route::resource('/posts',PostController::class);
+Route::resource('posts',PostController::class);
+
+Route::get('blog',[BlogController::class,'index'])->name('blog.index');
+
+Route::get('blog/create',[BlogController::class,'create'])->name('blog.create');
+
+Route::post('blog/store',[BlogController::class,'store'])->name('blog.store');
+
+Route::get('blog/edit/{blog}',[BlogController::class,'edit'])->name('blog.edit');
+
+Route::post('blog/update/{blog}',[BlogController::class,'update'])->name('blog.update');
+
+Route::post('blog/delete/{blog}',[BlogController::class,'delete'])->name('blog.delete');
+
+Route::get('blog/show/{blog}',[BlogController::class,'show'])->name('blog.show');
+
