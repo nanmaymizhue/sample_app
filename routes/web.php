@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,3 +42,10 @@ Route::post('blog/delete/{blog}',[BlogController::class,'delete'])->name('blog.d
 
 Route::get('blog/show/{blog}',[BlogController::class,'show'])->name('blog.show');
 
+Route::get('admin',[AdminController::class,'index'])->name('admin');
+
+Route::get('admin/widget',[AdminController::class,'widget'])->name('admin.widget');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
