@@ -6,9 +6,15 @@ use App\Http\Requests\BlogRequest;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 
+
 class BlogController extends Controller
 {
     public function __construct(){
+        $this->middleware('permission:blogList',['only'=>['index']]);
+        $this->middleware('permission:blogCreate',['only'=>['create','store']]);
+        $this->middleware('permission:blogEdit',['only'=>['edit','update']]);
+        $this->middleware('permission:blogDelete',['only'=>['destroy']]);
+        $this->middleware('permission:blogShow',['only'=>['show']]);
         $this->middleware('auth');
     }
     public function index(){

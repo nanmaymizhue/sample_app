@@ -8,7 +8,9 @@
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title font-weight-bold">Blog Listing</h3>
-                  <a href="{{route('blog.create')}}" class="btn btn-info float-right text-white">Add New</a>                     
+                  @can('blogCreate')
+                  <a href="{{route('blog.create')}}" class="btn btn-info float-right text-white">Add New</a>  
+                  @endcan                   
                 </div>
                 
                 <div class="card-body">
@@ -32,12 +34,18 @@
                             <td>{{$val->description}}</td>
                             <td>
                                 <div class="d-flex flex-row">
-                                    <a href="{{route('blog.edit',$val->id)}}" class="btn btn-success mx-2">Edit</a>
-                                    <a href="{{route('blog.show',$val->id)}}" class="btn btn-primary">View</a>
-                                    <form method="POST" action="{{route('blog.delete',$val->id)}}">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger mx-2" onclick="return confirm('Are you sure you want to delete this {{$val->name}} blog?')">Delete</button>                               
-                                    </form>
+                                    @can('blogEdit')
+                                      <a href="{{route('blog.edit',$val->id)}}" class="btn btn-success mx-2">Edit</a>
+                                    @endcan
+                                    @can('blogShow')
+                                      <a href="{{route('blog.show',$val->id)}}" class="btn btn-primary">View</a>
+                                    @endcan
+                                    @can('blogDelete')
+                                      <form method="POST" action="{{route('blog.delete',$val->id)}}">
+                                          @csrf
+                                          <button type="submit" class="btn btn-danger mx-2" onclick="return confirm('Are you sure you want to delete this {{$val->name}} blog?')">Delete</button>                               
+                                      </form>
+                                    @endcan
                                 </div>
                                 
                             </td>

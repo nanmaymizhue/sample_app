@@ -4,6 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +49,12 @@ Route::get('admin',[AdminController::class,'index'])->name('admin');
 
 Route::get('admin/widget',[AdminController::class,'widget'])->name('admin.widget');
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('permission',PermissionController::class);
+
+Route::resource('role',RoleController::class);
+
+Route::resource('user',UserController::class);

@@ -11,7 +11,7 @@
                     <h3 class="card-title">Edit Blog</h3>
                 </div>
                     
-                <form id="quickForm" method="POST" action="{{route('blog.store')}}">
+                <form id="quickForm" method="POST" action="{{route('blog.update',$blog->id)}}">
                     @csrf
                     <div class="card-body">
                     <div class="form-group">

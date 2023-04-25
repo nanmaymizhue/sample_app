@@ -256,39 +256,76 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href={{route('admin')}} class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+          @can('dashboard')
+            <li class="nav-item menu-open">
+              <a href={{route('admin')}} class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Dashboard                
+                </p>
+              </a>         
+            </li>
+          @endcan
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa-solid fa-user"></i>
               <p>
-                Dashboard
+                 Authorization
                 <i class="right fas fa-angle-left"></i>
               </p>
-            </a>         
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href={{route('user.index')}} class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Admin List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href={{route('role.index')}} class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Role</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href={{route('permission.index')}} class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Permission</p>
+                </a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a href={{route('admin.widget')}} class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li> 
-          <li class="nav-item">
-            <a href={{route('blog.index')}} class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Blog
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li> 
-          {{-- <li class="nav-item">
+
+          @can('widget')
+            <li class="nav-item">
+              <a href={{route('admin.widget')}} class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Widgets
+                  <span class="right badge badge-danger">New</span>
+                </p>
+              </a>
+            </li> 
+          @endcan
+          @can('blogList')
+            <li class="nav-item">
+              <a href={{route('blog.index')}} class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>
+                  Blog
+                  <span class="right badge badge-warning">New</span>
+                </p>
+              </a>
+            </li>
+          @endcan 
+          
+           {{-- <li class="nav-item">
             <a href={{route('blog.index')}} class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Posts
-                <i class="fas fa-angle-left right"></i>
+                <span class="right badge badge-warning">New</span>
               </p>
             </a>
           </li>  --}}
