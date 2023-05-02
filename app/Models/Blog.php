@@ -9,5 +9,9 @@ class Blog extends Model
 {
     use HasFactory;
 
-    protected $fillable =['name','description','image'];  
+    protected $fillable =['name','image','description','author_id'];  
+
+   public function author(){
+    return $this->belongsTo(Author::class);
+   }
 }

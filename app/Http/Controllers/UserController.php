@@ -6,14 +6,19 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Exists;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permission:userList',['only'=>['index,create,store,show,edit,update,delete']]);
+        $this->middleware('auth');
+     }
 
     public function index()
     {
-        $result = User::all();
+        $result = User::all();       
         return view('backend.authorization.user.index', compact('result'));
     }
 
@@ -28,13 +33,15 @@ class UserController extends Controller
     {
        $validData=$request->validated();
        
-       $encryptPassword = Hash::make($validData['password']);
+       $valid['password'] = Hash::make($validData['password']);
 
-        $user = User::create([
-            'name' => $validData['name'],
-            'email' => $validData['email'],
-            'password' => $encryptPassword,
-        ]);
+       $user = User::create($validData);
+
+        // $user = User::create([
+        //     'name' => $validData['name'],
+        //     'email' => $validData['email'],
+        //     'password' => $encryptPassword,
+        // ]);
 
         // $role = Role::where('id', $request->input('role'))->get();
 
@@ -52,7 +59,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user=User::where('id',$id)->first();
+        $user=User::where('id',$id)->first();       
         $role = Role::all();
         return view('backend.authorization.user.edit',compact('user','role'));
     }
@@ -62,16 +69,19 @@ class UserController extends Controller
     {
         $validData = $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email,'.$id,
             'role'=>'required'
-        ]);
 
+        ]);
+ 
         $user = User::where('id', $id)->first();
 
-        $user->update([
-            'name' => $validData['name'],
-            'email' => $validData['email'],
-        ]);
+        $user->update($validData);
+
+        // $user->update([
+        //     'name' => $validData['name'],
+        //     'email' => $validData['email'],
+        // ]);
 
         $user->syncRoles($validData['role']);
         return redirect()->route('user.index');

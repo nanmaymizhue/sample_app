@@ -9,6 +9,10 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permission:roleList',['only'=>['index,create,store,show,edit,update,delete']]);
+        $this->middleware('auth');
+     }
     public function index()
     {
         $result = Role::all();
@@ -26,14 +30,18 @@ class RoleController extends Controller
     {
         $validData=$request->validated();
 
-        $role = Role::create([
-            'name'=>$validData['name']
-        ]);
+        $role = Role::create($validData);
 
+        
         $role->givePermissionTo($validData['permissions']);
 
         return redirect()->route('role.index');
         
+
+        // $role = Role::create([
+        //     'name'=>$validData['name']
+        // ]);
+
         // $permission = Permission::whereIn('id', $request->input('permissions'))->get();
         //$ $role->givePermissionTo($permission);
     }
@@ -51,12 +59,16 @@ class RoleController extends Controller
         return view('backend.authorization.role.edit', compact('role', 'permission'));
     }
 
-    public function update(RoleRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $validData = $request->validated();
+        $validData=$request->validate([
+            'name'=>'required|string|unique:roles,name,'.$id,
+            'permissions'=>'required',
+        ]);
+       
         $role=Role::where('id',$id)->first();
 
-        $role->update(['name'=>$validData['name']]);
+        $role->update($validData);
 
         $role->syncPermissions($validData['permissions']);
 

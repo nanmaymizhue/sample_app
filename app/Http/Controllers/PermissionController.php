@@ -9,7 +9,12 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
-   
+    
+    public function __construct(){
+       $this->middleware('permission:permissionList',['only'=>['index,create,store,show,edit,update,delete']]);
+       $this->middleware('auth');
+    }
+
     public function index()
     {
         $result=Permission::all();  

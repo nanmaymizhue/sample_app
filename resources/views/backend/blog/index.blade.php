@@ -21,6 +21,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Image</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Author</th>
                         <th>Action</th>
                         </tr>
                     </thead>
@@ -30,8 +31,14 @@
                         <tr>
                             <th scope="row">{{$val->id}}</th>
                             <td>{{$val->name}}</td>
-                            <td>{{$val->image}}</td>
+                            <td>
+                              {{-- <img src="{{asset('storage/b_images/'.$val->image)}}" alt="My Image" class="w-25 h-25"> --}}
+                              <img src="{{asset('blog_images/'.$val->image)}}" alt="My Image" class="w-25 h-25">
+                            </td>
                             <td>{{$val->description}}</td>
+                            <td>                             
+                              {{$val->author->name}}
+                            </td>
                             <td>
                                 <div class="d-flex flex-row">
                                     @can('blogEdit')
