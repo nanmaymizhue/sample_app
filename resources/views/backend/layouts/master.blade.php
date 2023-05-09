@@ -267,7 +267,7 @@
             </li>
           @endcan
 
-          @can('authorization')
+          {{-- @can('authorization') --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fa-solid fa-user"></i>
@@ -277,35 +277,35 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              @can('userList')
+              {{-- @can('userList') --}}
               <li class="nav-item">
                 <a href={{route('user.index')}} class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Admin List</p>
                 </a>
               </li>
-              @endcan
-              @can('roleList')
+              {{-- @endcan --}}
+              {{-- @can('roleList') --}}
               <li class="nav-item">
                 <a href={{route('role.index')}} class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Role</p>
                 </a>
               </li>
-              @endcan
+              {{-- @endcan --}}
 
-              @can('permissionList')
+              {{-- @can('permissionList') --}}
               <li class="nav-item">
                 <a href={{route('permission.index')}} class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Permission</p>
                 </a>
               </li>
-              @endcan
+              {{-- @endcan --}}
 
             </ul>
           </li>
-          @endcan
+          {{-- @endcan --}}
 
           @can('widget')
             <li class="nav-item">

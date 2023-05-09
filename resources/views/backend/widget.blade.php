@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('content')
+{{-- @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -2323,4 +2323,62 @@
       <i class="fas fa-chevron-up"></i>
     </a>
 
+@endsection --}}
+
+@section('content')
+    <section class="content mt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title font-weight-bold">API Testing</h3>
+
+                            {{-- <a href="{{ route('user.create') }}" class="btn btn-info float-right text-white">Add New</a> --}}
+
+                        </div>
+
+                        <div class="card-body">
+                            <table id="dataTable" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        {{-- <th scope="col">#</th> --}}
+                                        <th scope="col">API</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Auth</th>
+                                        <th scope="col">Cors</th>
+                                        <th scope="col">Link</th>
+                                        <th scope="col">Category</th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($response->entries as $entry)
+                                        <tr>
+                                            {{-- <th scope="row">{{ $res->id }}</th> --}}
+                                            <td>{{ $entry->API }}</td>
+                                            <td>{{ $entry->Description }}</td>
+                                            <td>{{ $entry->Auth }}</td>
+                                            <td>{{ $entry->Cors}}</td>
+                                            <td>{{ $entry->Link }}</td>
+                                            <td>{{ $entry->Category }}</td>
+                            
+                                           
+                                            
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 @endsection
+
+

@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" name="password" class="form-control" value="{{old('password')}}"  value="{{old('name')}}"id="password" placeholder="Enter Password">
+                            <input type="password" name="password" class="form-control" value="{{old('password')}}" id="password" placeholder="Enter Password">
                             @if($errors->has('password'))
                                 <small class="text-danger">{{$errors->first('password')}}</small>
                             @endif                    

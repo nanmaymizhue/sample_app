@@ -2,6 +2,17 @@
 @section('content')
     <section class="content mt-3">
         <div class="container-fluid">
+
+            @if ($errors->has('errorMessage'))
+                <p class="text-danger" id="errorMessage">{{ $errors->first('errorMessage') }}</p>
+                <script>
+                    setTimeout(function() {
+                        document.getElementById("errorMessage").style.display = "none";
+                    }, 5000);
+                </script>
+            @endif
+
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">

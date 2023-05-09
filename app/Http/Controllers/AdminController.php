@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,7 +14,18 @@ class AdminController extends Controller
         return view('backend.index');
     }
     public function widget(){
-        return view('backend.widget');
+        // return view('backend.widget');
+
+        // get api from  other free uri //
+        $client=new Client();
+        $request = $client->get('https://api.publicapis.org/entries');
+        if($request->getStatusCode() == 200){
+            $response =json_decode($request->getBody());
+             dd($response);            
+            return view('backend.widget',compact('response'));
+        }
+
     }
   
 }
+

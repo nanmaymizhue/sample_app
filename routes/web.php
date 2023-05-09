@@ -58,3 +58,4 @@ Route::resource('permission',PermissionController::class);
 Route::resource('role',RoleController::class);
 
 Route::resource('user',UserController::class);
+

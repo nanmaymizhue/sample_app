@@ -10,7 +10,10 @@ use App\Services\Blog\BlogService;
 use App\Services\Blog\BlogServiceInterface;
 use App\Services\Post\PostService;
 use App\Services\Post\PostServiceInterface;
+use App\Services\User\UserService;
+use App\Services\User\UserServiceInterface;
 use Illuminate\Support\ServiceProvider;
+
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -35,5 +38,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(BlogServiceInterface::class,BlogService::class);
         $this->app->bind(PostRepoInterface::class,PostRepository::class);
         $this->app->bind(PostServiceInterface::class,PostService::class);
+        $this->app->bind(UserServiceInterface::class,UserService::class);
     }
 }
